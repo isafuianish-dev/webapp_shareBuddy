@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Share Buddy</title>
+<link rel="icon" type="image/png" href="media/favicon.png">
+<link rel="stylesheet" href="https://isafuianish-dev.github.io/webapp_cdnBuddy/css/tokens.css">
+<link rel="stylesheet" href="https://isafuianish-dev.github.io/webapp_cdnBuddy/css/base.css">
+<link rel="stylesheet" href="style.css">
+<script src="https://isafuianish-dev.github.io/webapp_cdnBuddy/js/theme-init.js" data-app="webapp_shareBuddy"></script>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="topbar-brand">
+      <span class="brand-icon" aria-hidden="true"><span class="icon" style="-webkit-mask-image:url(media/icon.svg);mask-image:url(media/icon.svg);"></span></span>
+      <h1>Share Buddy</h1>
+    </div>
+    <div class="topbar-actions">
+      <span class="conn-badge" id="connBadge" data-state="idle">Not connected</span>
+      <button id="btnReset" class="btn btn-ghost" hidden>Start over</button>
+      <button id="btnSettings" class="btn btn-ghost btn-icon" title="Settings" aria-label="Settings"></button>
+    </div>
+  </header>
+
+  <main class="layout" id="layout">
+    <!-- SEND -->
+    <section class="panel pane" id="paneSend" aria-labelledby="sendTitle">
+      <div class="pane-head">
+        <h2 id="sendTitle">Send</h2>
+        <p class="pane-sub">Pick files, then share the code with the other device.</p>
+      </div>
+      <div class="pane-body">
+        <label class="dropzone" id="dropzone" for="fileInput">
+          <span class="dropzone-icon" id="dropzoneIcon" aria-hidden="true"></span>
+          <span class="dropzone-text"><strong>Choose files</strong> or drop them here</span>
+          <input type="file" id="fileInput" multiple hidden>
+        </label>
+        <ul class="file-list" id="sendList"></ul>
+
+        <button type="button" id="btnGetCode" class="btn btn-primary">Get code</button>
+
+        <div id="codeBox" class="code-box" hidden>
+          <span class="hint">Enter this code on the other device</span>
+          <span class="code-display mono" id="codeDisplay" aria-live="polite"></span>
+          <button type="button" id="btnCopyCode" class="btn btn-ghost">Copy</button>
+        </div>
+
+        <div id="allowBox" class="allow-box" hidden>
+          <span>A device wants to connect. Is it yours?</span>
+          <span class="allow-actions">
+            <button type="button" id="btnAllow" class="btn btn-primary">Allow</button>
+            <button type="button" id="btnDeny" class="btn btn-ghost">Deny</button>
+          </span>
+        </div>
+        <p class="pane-error" id="sendError" hidden></p>
+      </div>
+    </section>
+
+    <!-- RECEIVE -->
+    <section class="panel pane" id="paneReceive" aria-labelledby="receiveTitle">
+      <div class="pane-head">
+        <h2 id="receiveTitle">Receive</h2>
+        <p class="pane-sub">Enter the code shown on the sending device.</p>
+      </div>
+      <div class="pane-body">
+        <form class="code-row" id="joinForm" autocomplete="off">
+          <input type="text" id="codeInput" class="form-control mono" inputmode="numeric" pattern="[0-9 ]*" maxlength="7" placeholder="123 456" aria-label="6-digit code">
+          <button type="submit" id="btnJoin" class="btn btn-primary">Join</button>
+        </form>
+        <p class="hint" id="receiveStatus" hidden></p>
+        <p class="pane-error" id="receiveError" hidden></p>
+
+        <div class="list-head" id="receiveHead" hidden>
+          <span>Received files</span>
+          <button type="button" id="btnSaveAll" class="btn btn-ghost">Save all</button>
+        </div>
+        <ul class="file-list" id="receiveList"></ul>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="https://isafuianish-dev.github.io/webapp_cdnBuddy/js/utils.js"></script>
+<script src="https://isafuianish-dev.github.io/webapp_cdnBuddy/js/icons.js"></script>
+<script src="https://isafuianish-dev.github.io/webapp_cdnBuddy/js/modal.js"></script>
+<script src="https://isafuianish-dev.github.io/webapp_cdnBuddy/js/theme.js"></script>
+<script src="https://isafuianish-dev.github.io/webapp_cdnBuddy/js/settings.js"></script>
+<script src="https://isafuianish-dev.github.io/webapp_cdnBuddy/js/markdown.js"></script>
+<script src="https://isafuianish-dev.github.io/webapp_cdnBuddy/js/manual.js"></script>
+<script src="peerjs.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
